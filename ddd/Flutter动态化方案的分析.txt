@@ -1,0 +1,31 @@
+
+AST -> DSL 方案:
+
+https://tech.meituan.com/2020/06/23/meituan-flutter-flap.html
+https://fair.58.com/zh/article/fair_design.html
+https://github.com/wuba/fair
+
+1. 系统方法、Widget生成属性等等的映射这种体力活的工作量大，就算是按需生成工作量也大，(按需，比如有些类型的Widget业务没用到，就不需要去写映射)
+
+2. 效率上，这种方案本质是增加一层语法解析和运行时，吃了一部分性能，尤其是对结构复杂或渲染要求较高的页面
+
+3. Flutter版本升级与开发友好上，当Flutter版本升级后一些API的改变及类属性的变化，DSL的解析运行时需要跟进; 一些对开发友好的语法糖等会因解析能力而限制
+
+
+
+
+
+Hook 方案，可行性研究中: 
+
+1. 对于 Native inline hook 一直以来经有比较成熟的方案，比如开源的Frida，支持多平台，参考#Reference1
+
+2. Flutter 的 hook 也可以实现，实践可参考#Reference2，即使 symbol 被 strip掉，也可通过 --split-debug-info 映射回来
+
+3. 方法级别的替换，动态加载 编译dart后的产物(如 app_patch.so/framework/dylib)，load/dlopen这动态库，通过 hook 把原 App 的方法替换/调用 app_patch 里对应的方法，这一过程还需要实践冒烟
+
+4. 类级别的替换, 还需要去熟悉dart vm对类结构体及其列表的处理, 又或者dart vm运行时有没有查找类过程(都native code固定了还是?)，来得出类的替换/优先使用patched类的可行性
+
+#Reference1: https://frida.re/
+#Reference2: https://bbs.pediy.com/thread-273545.htm
+
+
