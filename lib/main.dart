@@ -254,7 +254,9 @@ class SubmitButton extends StatelessWidget {
              var testBlock= BlocProvider.of<TestBlock>(context);
              print('==testBlock====${testBlock.state.email}=');
              ///修改数据
+
                 context.read<TestBlock>().add(TestEmailChanged(email: '==${testBlock.state.email}==1'));
+
 
                 ///跳转
                 // Navigator.push(context, RouteUtil.newCommonPageRoute(
