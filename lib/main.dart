@@ -249,6 +249,7 @@ class SubmitButton extends StatelessWidget {
 
                 ///修改数据
 
+              ////  fdfdfdffdfddfdfdf
                 context.read<TestBlock>().add(TestEmailChanged(email: '==${testBlock.state.email}==1'));
 
                 ///跳转
