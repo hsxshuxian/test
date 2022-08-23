@@ -11,6 +11,7 @@ import 'package:flutter_ios_channel/xp_streams_channel.dart';
 import 'package:formz/formz.dart';
 
 import 'block/my_form_bloc.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -21,10 +22,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: 'Flutter Demo',
-      supportedLocales: [Locale('en', 'US'),Locale('en', 'US')],
+      supportedLocales: [Locale('en', 'US'), Locale('en', 'US')],
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -62,10 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
-
-
-
-
     });
   }
 
@@ -92,7 +88,6 @@ class _MyHomePageState extends State<MyHomePage> {
           BlocProvider<TestBlock>(
             create: (BuildContext context) => TestBlock(),
           ),
-
         ],
         child: MyForm(),
       ),
@@ -109,6 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
 class MyForm extends StatefulWidget {
   @override
   _MyFormState createState() => _MyFormState();
@@ -167,7 +163,7 @@ class _MyFormState extends State<MyForm> {
             EmailInput(focusNode: _emailFocusNode),
             PasswordInput(focusNode: _passwordFocusNode),
             SubmitButton(),
-          //  SubmitButton(),
+            //  SubmitButton(),
           ],
         ),
       ),
@@ -191,9 +187,7 @@ class EmailInput extends StatelessWidget {
             icon: const Icon(Icons.email),
             labelText: 'Email',
             helperText: 'A complete, valid email e.g. joe@gmail.com',
-            errorText: state.email.invalid
-                ? 'Please ensure the email entered is valid'
-                : null,
+            errorText: state.email.invalid ? 'Please ensure the email entered is valid' : null,
           ),
           keyboardType: TextInputType.emailAddress,
           onChanged: (value) {
@@ -220,8 +214,7 @@ class PasswordInput extends StatelessWidget {
           focusNode: focusNode,
           decoration: InputDecoration(
             icon: const Icon(Icons.lock),
-            helperText:
-            '''Password should be at least 8 characters with at least one letter and number''',
+            helperText: '''Password should be at least 8 characters with at least one letter and number''',
             helperMaxLines: 2,
             labelText: 'Password',
             errorMaxLines: 2,
@@ -249,14 +242,14 @@ class SubmitButton extends StatelessWidget {
           children: [
             Text(state.email),
             ElevatedButton(
-              onPressed: (){
+              onPressed: () {
                 ///获取修改的数据
-             var testBlock= BlocProvider.of<TestBlock>(context);
-             print('==testBlock====${testBlock.state.email}=');
-             ///修改数据
+                var testBlock = BlocProvider.of<TestBlock>(context);
+                print('==testBlock====${testBlock.state.email}=');
+
+                ///修改数据
 
                 context.read<TestBlock>().add(TestEmailChanged(email: '==${testBlock.state.email}==1'));
-
 
                 ///跳转
                 // Navigator.push(context, RouteUtil.newCommonPageRoute(
